@@ -83,3 +83,13 @@ The `benchmark.py` script runs randomized workloads with varying numbers of thre
 | FineGrainedSet   | 8       | 0.7146                | 0.8729                |
 
 **Observation**: Fine-grained locking outperforms coarse-grained locking under high concurrency.
+
+
+| Variant          | Threads | Time (s) - Hardware 1 | Path length (m) | Distance diff. (%) | Time (s) - Hardware 2 | Distance diff. (%)    | Path length (m) |
+|------------------|---------|-----------------------|-----------------|--------------------|-----------------------|-----------------------|-----------------|
+| NetworkX         |         | 0.0628                | 12973.56        | _                  |                       | -                     |                 |
+|                  | 1       | 0.3422                | 12973.56        | 0.00               |                       |                       |                 |
+|                  | 2       | 0.3514                | 12973.56        | 0.00               |                       |                       |                 |
+| Parallel A*      | 4       | 0.3659                | 12973.56        | 0.00               |                       |                       |                 |
+|                  | 8       | 0.6100                | 12974.16        | 0.00               |                       |                       |                 |
+|                  | 32      | 0.3635                | 13026.26        | 0.41               |                       |                       |                 |
