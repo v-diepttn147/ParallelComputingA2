@@ -7,12 +7,19 @@ class CoarseGrainedSet:
 
     def add(self, value):
         with self.lock:
-            if not self.contains(value):
-                node = Node(value)
-                node.next = self.head
-                self.head = node
-                return True
-            return False
+            prev, curr = None, self.head
+            while curr and curr.value < value:
+                prev, curr = curr, curr.next
+            if curr and curr.value == value:
+                return False  # already present
+            new_node = Node(value)
+            new_node.next = curr
+            if prev:
+                prev.next = new_node
+            else:
+                self.head = new_node
+            return True
+
 
     def remove(self, value):
         with self.lock:

@@ -18,7 +18,7 @@ class FineGrainedSet:
         curr = pred.next
         curr.lock.acquire()
         try:
-            while curr.value is not None and value < curr.value:
+            while curr.value is not None and curr.value < value:
                 pred.lock.release()
                 pred, curr = curr, curr.next
                 curr.lock.acquire()
@@ -40,7 +40,7 @@ class FineGrainedSet:
         curr = pred.next
         curr.lock.acquire()
         try:
-            while curr.value is not None and value < curr.value:
+            while curr.value is not None and curr.value < value:
                 pred.lock.release()
                 pred, curr = curr, curr.next
                 curr.lock.acquire()
@@ -55,20 +55,16 @@ class FineGrainedSet:
             pred.lock.release()
 
     def contains(self, value):
-        curr = self.head
+        pred = self.head
+        pred.lock.acquire()
+        curr = pred.next
         curr.lock.acquire()
         try:
-            next_node = curr.next
-            next_node.lock.acquire()
-            try:
-                while next_node.value is not None and value < next_node.value:
-                    curr.lock.release()
-                    curr = next_node
-                    next_node = curr.next
-                    next_node.lock.acquire()
-
-                return next_node.value == value
-            finally:
-                next_node.lock.release()
+            while curr.value is not None and curr.value < value:
+                pred.lock.release()
+                pred, curr = curr, curr.next
+                curr.lock.acquire()
+            return curr.value == value
         finally:
             curr.lock.release()
+            pred.lock.release()
