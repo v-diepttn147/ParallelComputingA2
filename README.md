@@ -71,15 +71,15 @@ The `benchmark.py` script runs randomized workloads with varying numbers of thre
 
 #### Benchmark Results
 
-| Variant           | Threads | Time (s) - Hardware 1 | Time (s) - Hardware 2 |
+| Variant          | Threads | Time (s) - Hardware 1 | Time (s) - Hardware 2 |
 |------------------|---------|-----------------------|-----------------------|
-| CoarseGrainedSet | 1       | -                     | 0.0446                |
-| CoarseGrainedSet | 2       | -                     | 0.1099                |
-| CoarseGrainedSet | 4       | -                     | 0.2358                |
-| CoarseGrainedSet | 8       | -                     | 0.4632                |
-| FineGrainedSet   | 1       | -                     | 0.0588                |
-| FineGrainedSet   | 2       | -                     | 0.1484                |
-| FineGrainedSet   | 4       | -                     | 0.3620                |
-| FineGrainedSet   | 8       | -                     | 0.8729                |
+| CoarseGrainedSet | 1       | 0.0353                | 0.0446                |
+| CoarseGrainedSet | 2       | 0.0587                | 0.1099                |
+| CoarseGrainedSet | 4       | 0.1190                | 0.2358                |
+| CoarseGrainedSet | 8       | 0.2415                | 0.4632                |
+| FineGrainedSet   | 1       | 0.0535                | 0.0588                |
+| FineGrainedSet   | 2       | 0.1478                | 0.1484                |
+| FineGrainedSet   | 4       | 0.3378                | 0.3620                |
+| FineGrainedSet   | 8       | 0.7146                | 0.8729                |
 
 **Observation**: Fine-grained locking outperforms coarse-grained locking under high concurrency.
